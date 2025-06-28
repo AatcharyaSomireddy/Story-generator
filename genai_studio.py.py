@@ -36,16 +36,17 @@ st.markdown(f"""
 
     /* Main Header */
     .main-header {{
-        text-align: center;
-        padding: 2rem 0;
-        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-        margin: -1rem -1rem 2rem -1rem;
-        border-radius: 0 0 20px 20px;
-        color: white;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-    }}
+    text-align: center;
+    padding: 2rem 0;
+    background: #000000;  /* solid black */
+    margin: -1rem -1rem 2rem -1rem;
+    border-radius: 0 0 20px 20px;
+    color: white;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}}
+
 
     /* Story Container */
     .story-container {{
