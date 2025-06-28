@@ -401,7 +401,7 @@ with col1:
     
     character_name = st.text_input(
         "Main Character Name",
-        value="Alex",
+        value="RAM",
         help="Enter the name of your story's protagonist"
     )
     
