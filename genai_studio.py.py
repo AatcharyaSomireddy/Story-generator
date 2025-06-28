@@ -46,7 +46,7 @@ st.markdown(f"""
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
 }
-}
+
 
     /* Story Container */
     .story-container {{
