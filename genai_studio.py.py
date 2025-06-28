@@ -5,6 +5,8 @@ import os
 import time
 import re
 
+import streamlit as st
+
 # -------------------------------
 # Page Configuration
 # -------------------------------
@@ -12,13 +14,12 @@ st.set_page_config(
     page_title="GenAI Story Generator",
     page_icon="📚",
     layout="wide",
-    # no sidebar at all, so no initial_sidebar_state param
 )
 
 # -------------------------------
-# Custom CSS Styling with Background Image and Color Changes
+# Custom CSS Styling with Background Image and Dark Theme
 # -------------------------------
-background_image_url = "https://thumbs.dreamstime.com/b/ai-story-generator-as-portal-to-another-world-magical-creatures-breathtaking-landscapes-fantastical-adventures-unfold-302872675.jpg"  # Replace this URL with your preferred image
+background_image_url = "https://thumbs.dreamstime.com/b/ai-story-generator-as-portal-to-another-world-magical-creatures-breathtaking-landscapes-fantastical-adventures-unfold-302872675.jpg"  # Replace if you want
 
 st.markdown(f"""
 <style>
@@ -29,34 +30,33 @@ st.markdown(f"""
         background-position: center;
         background-attachment: fixed;
         background-repeat: no-repeat;
-        filter: brightness(0.85);
+        filter: brightness(0.65);
         height: 100vh;
         width: 100vw;
     }}
 
     /* Main Header */
     .main-header {{
-    text-align: center;
-    padding: 2rem 0;
-    background: #000000;  /* solid black */
-    margin: -1rem -1rem 2rem -1rem;
-    border-radius: 0 0 20px 20px;
-    color: white;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-}}
-
+        text-align: center;
+        padding: 2rem 0;
+        background: #000000;  /* solid black */
+        margin: -1rem -1rem 2rem -1rem;
+        border-radius: 0 0 20px 20px;
+        color: white;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }}
 
     /* Story Container */
     .story-container {{
-        background: rgba(255, 255, 255, 0.85);
+        background: rgba(0, 0, 0, 0.85);  /* dark transparent black */
         padding: 2rem;
         border-radius: 15px;
-        border-left: 5px solid #11998e;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        border-left: 5px solid #ffffff;  /* white border */
+        box-shadow: 0 8px 32px rgba(0,0,0,0.7);
         margin: 2rem 0;
-        color: #1a1a1a;
+        color: white;
         font-family: 'Georgia', serif;
     }}
 
@@ -66,13 +66,14 @@ st.markdown(f"""
         line-height: 1.6;
         text-align: justify;
         white-space: pre-line;
+        color: white;
     }}
 
     /* Generate Button */
     .generate-btn {{
-        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        background: linear-gradient(135deg, #222222 0%, #444444 100%);
         color: white;
-        border: none;
+        border: 2px solid white;
         padding: 1rem 2rem;
         border-radius: 10px;
         font-size: 18px;
@@ -81,16 +82,18 @@ st.markdown(f"""
         width: 100%;
         transition: all 0.3s ease;
         margin-top: 1rem;
+        text-shadow: 0 0 3px black;
     }}
     .generate-btn:hover {{
+        background: linear-gradient(135deg, #444444 0%, #666666 100%);
+        box-shadow: 0 8px 25px rgba(255,255,255,0.4);
         transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(17, 153, 142, 0.6);
     }}
 
     /* Footer */
     .footer {{
         text-align: center;
-        color: #eee;
+        color: white;
         font-size: 14px;
         margin-top: 3rem;
         padding: 2rem 0;
@@ -112,6 +115,16 @@ st.markdown(f"""
     /* Form elements margin */
     .stSelectbox, .stTextInput, .stTextArea {{
         margin-bottom: 1rem;
+        color: white;
+        background-color: #222222;
+        border: 1px solid #555555;
+        border-radius: 5px;
+    }}
+
+    /* Placeholder text color */
+    ::placeholder {{
+        color: #bbb !important;
+        opacity: 1;
     }}
 </style>
 """, unsafe_allow_html=True)
@@ -126,7 +139,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Example main content (replace this with your actual app code)
+# Example main content (replace with your actual app code)
 with st.container():
     st.markdown("""
     <div class="story-container">
