@@ -5,7 +5,7 @@ import os
 st.set_page_config(page_title="Story Generator", layout="centered")
 
 # Load secrets
-from openai import OpenAI
+
 
 client = OpenAI(api_key=st.secrets["openai_api_key"])
 
