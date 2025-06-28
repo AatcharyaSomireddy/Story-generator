@@ -1,14 +1,10 @@
 import streamlit as st
 from openai import OpenAI
-import os
 
 st.set_page_config(page_title="Story Generator", layout="centered")
 
-# Load secrets
-
-
+# Load OpenAI API key from Streamlit secrets
 client = OpenAI(api_key=st.secrets["openai_api_key"])
-
 
 st.title("📚 AI Story Generator")
 
@@ -25,16 +21,16 @@ if st.button("Generate Story"):
 
     with st.spinner("Generating story..."):
         try:
-            response = openai.ChatCompletion.create(
-                model="gpt-4",
+            response = client.chat.completions.create(
+                model="gpt-4o",  # or "gpt-4", "gpt-3.5-turbo"
                 messages=[
                     {"role": "system", "content": "You are a creative story writer."},
                     {"role": "user", "content": prompt}
                 ],
                 temperature=0.8,
-                max_tokens=length * 4 // 3,
+                max_tokens=int(length * 1.3),  # safe estimate
             )
-            story = response["choices"][0]["message"]["content"]
+            story = response.choices[0].message.content
             st.subheader("Your AI-Generated Story:")
             st.write(story)
         except Exception as e:
