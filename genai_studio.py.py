@@ -18,7 +18,7 @@ st.set_page_config(
 # -------------------------------
 # Custom CSS Styling with Background Image and Color Changes
 # -------------------------------
-background_image_url = "https://thumbs.dreamstime.com/b/ai-story-generator-as-portal-to-another-world-magical-creatures-breathtaking-landscapes-fantastical-adventures-unfold-302872675.jpg"  # Replace this URL with your preferred image
+background_image_url = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80"  # Replace this URL with your preferred image
 
 st.markdown(f"""
 <style>
@@ -35,18 +35,17 @@ st.markdown(f"""
     }}
 
     /* Main Header */
-    .main-header {
-    text-align: center;
-    padding: 2rem 0;
-    background: #000000;  /* solid black */
-    margin: -1rem -1rem 2rem -1rem;
-    border-radius: 0 0 20px 20px;
-    color: white;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-}
-
+    .main-header {{
+        text-align: center;
+        padding: 2rem 0;
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        margin: -1rem -1rem 2rem -1rem;
+        border-radius: 0 0 20px 20px;
+        color: white;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }}
 
     /* Story Container */
     .story-container {{
