@@ -19,7 +19,7 @@ st.set_page_config(
 # -------------------------------
 # Custom CSS Styling with Background Image and Dark Theme
 # -------------------------------
-background_image_url = "https://thumbs.dreamstime.com/b/ai-story-generator-as-portal-to-another-world-magical-creatures-breathtaking-landscapes-fantastical-adventures-unfold-302872675.jpg"  # Replace if you want
+background_image_url = "https://t4.ftcdn.net/jpg/02/10/45/95/360_F_210459536_XmLDEcKq2DpeNLVmheuWeu9NM9aGKnih.jpg"  # Replace if you want
 
 st.markdown(f"""
 <style>
