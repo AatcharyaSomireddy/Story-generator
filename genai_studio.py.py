@@ -17,32 +17,32 @@ st.set_page_config(
 )
 
 # -------------------------------
-# Custom CSS Styling (Dark Theme - No Background Image)
+# Custom CSS Styling (White Background Theme)
 # -------------------------------
 st.markdown("""
 <style>
     .stApp {
-        background-color: #000000 !important;
+        background-color: #ffffff !important;
     }
 
     .main-header {
         text-align: center;
         padding: 2rem 0;
-        background: #000000;
+        background: #000000; /* Black header */
         margin: -1rem -1rem 2rem -1rem;
         border-radius: 0 0 20px 20px;
         color: white;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     }
 
     .story-container {
-        background: rgba(0, 0, 0, 0.9);
+        background: #f9f9f9;
         padding: 2rem;
         border-radius: 15px;
-        border-left: 5px solid #ffffff;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+        border-left: 5px solid #000000;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         margin: 2rem 0;
-        color: white;
+        color: #222;
         font-family: 'Georgia', serif;
     }
 
@@ -51,13 +51,13 @@ st.markdown("""
         line-height: 1.6;
         text-align: justify;
         white-space: pre-line;
-        color: white;
+        color: #222;
     }
 
     .generate-btn {
-        background: linear-gradient(135deg, #222222 0%, #444444 100%);
+        background: #000000;
         color: white;
-        border: 2px solid white;
+        border: none;
         padding: 1rem 2rem;
         border-radius: 10px;
         font-size: 18px;
@@ -66,21 +66,20 @@ st.markdown("""
         width: 100%;
         transition: all 0.3s ease;
         margin-top: 1rem;
-        text-shadow: 0 0 3px black;
     }
     .generate-btn:hover {
-        background: linear-gradient(135deg, #444444 0%, #666666 100%);
-        box-shadow: 0 8px 25px rgba(255,255,255,0.4);
+        background: #333333;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         transform: translateY(-2px);
     }
 
     .footer {
         text-align: center;
-        color: white;
+        color: #666;
         font-size: 14px;
         margin-top: 3rem;
         padding: 2rem 0;
-        border-top: 1px solid rgba(255,255,255,0.3);
+        border-top: 1px solid #ddd;
     }
 
     #MainMenu, footer, header {
@@ -93,14 +92,14 @@ st.markdown("""
 
     .stSelectbox, .stTextInput, .stTextArea {
         margin-bottom: 1rem;
-        color: white;
-        background-color: #222222;
-        border: 1px solid #555555;
+        color: #222;
+        background-color: #ffffff;
+        border: 1px solid #ccc;
         border-radius: 5px;
     }
 
     ::placeholder {
-        color: #bbb !important;
+        color: #888 !important;
         opacity: 1;
     }
 </style>
@@ -138,6 +137,112 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+# -------------------------------
+# API Configuration
+# -------------------------------
+def get_api_credentials():
+    return {
+        "api_key": os.getenv("IBM_API_KEY", "your-api-key"),
+        "project_id": os.getenv("IBM_PROJECT_ID", "your-project-id"),
+        "region": os.getenv("IBM_REGION", "us-south")
+    }
+
+CREDENTIALS = get_api_credentials()
+VERSION = "2023-05-29"
+
+# Multiple model options for better story generation
+MODEL_OPTIONS = {
+    "Google Flan-UL2": "google/flan-ul2",
+    "IBM Granite-13B": "ibm/granite-13b-instruct-v2",
+    "Meta Llama-2-70B": "meta-llama/llama-2-70b-chat",
+    "Google Flan-T5-XXL": "google/flan-t5-xxl"
+}
+
+# -------------------------------
+# Enhanced Prompt Builder
+# -------------------------------
+def create_enhanced_story_prompt(character_name, story_type, context, writing_style, length_category, mood, setting):
+    """Create a sophisticated prompt for better story generation"""
+    
+    # Define story structure templates
+    story_structures = {
+        "suspense": {
+            "opening": "Create an atmosphere of tension and uncertainty",
+            "development": "Build suspense through pacing, foreshadowing, and mystery",
+            "climax": "Reveal the truth with maximum impact",
+            "resolution": "Provide a satisfying conclusion that ties up loose ends"
+        },
+        "adventure": {
+            "opening": "Establish the quest or journey",
+            "development": "Present challenges and obstacles to overcome",
+            "climax": "Face the greatest challenge or enemy",
+            "resolution": "Achieve the goal and show character growth"
+        },
+        "fantasy": {
+            "opening": "Introduce the magical world and its rules",
+            "development": "Explore magical elements and their consequences",
+            "climax": "Confront the magical threat or complete the quest",
+            "resolution": "Restore balance to the magical world"
+        },
+        "drama": {
+            "opening": "Establish character relationships and conflicts",
+            "development": "Deepen emotional conflicts and character development",
+            "climax": "Face the emotional crisis or life-changing moment",
+            "resolution": "Show character growth and resolution of conflicts"
+        },
+        "mystery": {
+            "opening": "Present the mystery or crime to be solved",
+            "development": "Gather clues and red herrings, build intrigue",
+            "climax": "Reveal the solution and confront the perpetrator",
+            "resolution": "Explain the mystery and show justice served"
+        },
+        "horror": {
+            "opening": "Establish normalcy before introducing the supernatural threat",
+            "development": "Escalate fear through psychological and physical terror",
+            "climax": "Confront the ultimate horror",
+            "resolution": "Survive or succumb to the horror with lasting impact"
+        }
+    }
+    
+    structure = story_structures.get(story_type.lower(), story_structures["adventure"])
+    
+    # Enhanced prompt with better instructions
+    prompt = f"""You are a professional creative writer. Write a compelling {story_type.lower()} story following these specifications:
+
+STORY REQUIREMENTS:
+- Main Character: {character_name}
+- Genre: {story_type}
+- Setting: {setting}
+- Mood/Tone: {mood}
+- Writing Style: {writing_style}
+- Length: {length_category}
+
+STORY CONTEXT:
+{context}
+
+STRUCTURE TO FOLLOW:
+- Opening: {structure['opening']}
+- Development: {structure['development']}
+- Climax: {structure['climax']}
+- Resolution: {structure['resolution']}
+
+WRITING GUIDELINES:
+1. Create vivid, immersive descriptions that engage the senses
+2. Develop realistic, relatable characters with clear motivations
+3. Use natural, engaging dialogue that reveals character personality
+4. Show don't tell - use actions and dialogue to convey emotions
+5. Maintain consistent pacing appropriate to the genre
+6. Include specific details that bring scenes to life
+7. Create emotional resonance with the reader
+8. Ensure plot events flow logically and build upon each other
+9. Use varied sentence structure for engaging prose
+10. End with a satisfying conclusion that feels earned
+
+Write a complete, well-structured story that captures the reader's attention from the first sentence and maintains engagement throughout. Focus on quality storytelling with rich descriptions, compelling characters, and a satisfying narrative arc.
+
+Story:"""
+
+    return prompt
 
 # -------------------------------
 # Enhanced IBM Watson API Integration
@@ -475,34 +580,34 @@ with col1:
 # -------------------------------
 with st.expander("💡 Story Writing Tips"):
     st.markdown("""
-    *For Better Stories:*
+    For Better Stories:
     - Provide detailed context about what happened to your character
     - Be specific about the setting and time period
     - Include emotional elements or conflicts in your context
     - Mention any specific themes you want explored
     - Try different creativity levels to find your preferred style
     
-    *Genre Tips:*
-    - *Suspense*: Focus on what's at stake and create uncertainty
-    - *Adventure*: Describe the quest or journey your character must undertake
-    - *Fantasy*: Establish magical elements or otherworldly settings
-    - *Drama*: Emphasize emotional conflicts and relationships
-    - *Mystery*: Present a puzzle or crime that needs solving
-    - *Horror*: Create atmosphere with fear-inducing elements
+    Genre Tips:
+    - Suspense: Focus on what's at stake and create uncertainty
+    - Adventure: Describe the quest or journey your character must undertake
+    - Fantasy: Establish magical elements or otherworldly settings
+    - Drama: Emphasize emotional conflicts and relationships
+    - Mystery: Present a puzzle or crime that needs solving
+    - Horror: Create atmosphere with fear-inducing elements
     """)
 
 with st.expander("🔧 Troubleshooting"):
     st.markdown("""
-    *Common Issues:*
-    - *Repetitive text*: Increase repetition penalty or try a different model
-    - *Story too short*: Increase max tokens or provide more context
-    - *Off-topic content*: Be more specific in your story context
-    - *Authentication errors*: Check your IBM Watson API credentials
+    Common Issues:
+    - Repetitive text: Increase repetition penalty or try a different model
+    - Story too short: Increase max tokens or provide more context
+    - Off-topic content: Be more specific in your story context
+    - Authentication errors: Check your IBM Watson API credentials
     
-    *Model Recommendations:*
-    - *Google Flan-UL2*: Good for creative, diverse stories
-    - *IBM Granite-13B*: Excellent for structured narratives
-    - *Meta Llama-2-70B*: Great for dialogue and character development
+    Model Recommendations:
+    - Google Flan-UL2: Good for creative, diverse stories
+    - IBM Granite-13B: Excellent for structured narratives
+    - Meta Llama-2-70B: Great for dialogue and character development
     """)
 
 # -------------------------------
