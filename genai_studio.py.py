@@ -12,41 +12,64 @@ st.set_page_config(
     page_title="GenAI Story Generator",
     page_icon="📚",
     layout="wide",
-    initial_sidebar_state="expanded"
+    # no sidebar at all, so no initial_sidebar_state param
 )
 
 # -------------------------------
-# Custom CSS Styling
+# Custom CSS Styling with Background Image and Color Changes
 # -------------------------------
-st.markdown("""
+background_image_url = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80"  # Replace this URL with your preferred image
+
+st.markdown(f"""
 <style>
-    .main-header {
+    /* Background Image */
+    .stApp {{
+        background-image: url('{background_image_url}');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        filter: brightness(0.85);
+        height: 100vh;
+        width: 100vw;
+    }}
+
+    /* Main Header */
+    .main-header {{
         text-align: center;
         padding: 2rem 0;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
         margin: -1rem -1rem 2rem -1rem;
         border-radius: 0 0 20px 20px;
         color: white;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    }
-    .story-container {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }}
+
+    /* Story Container */
+    .story-container {{
+        background: rgba(255, 255, 255, 0.85);
         padding: 2rem;
         border-radius: 15px;
-        border-left: 5px solid #667eea;
+        border-left: 5px solid #11998e;
         box-shadow: 0 8px 32px rgba(0,0,0,0.1);
         margin: 2rem 0;
-    }
-    .story-text {
+        color: #1a1a1a;
         font-family: 'Georgia', serif;
+    }}
+
+    /* Story Text */
+    .story-text {{
         font-size: 18px;
         line-height: 1.6;
-        color: #2c3e50;
         text-align: justify;
         white-space: pre-line;
-    }
-    .generate-btn {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }}
+
+    /* Generate Button */
+    .generate-btn {{
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
         color: white;
         border: none;
         padding: 1rem 2rem;
@@ -56,54 +79,39 @@ st.markdown("""
         cursor: pointer;
         width: 100%;
         transition: all 0.3s ease;
-    }
-    .generate-btn:hover {
+        margin-top: 1rem;
+    }}
+    .generate-btn:hover {{
         transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-    }
-    .footer {
+        box-shadow: 0 8px 25px rgba(17, 153, 142, 0.6);
+    }}
+
+    /* Footer */
+    .footer {{
         text-align: center;
-        color: #666;
+        color: #eee;
         font-size: 14px;
         margin-top: 3rem;
         padding: 2rem 0;
-        border-top: 1px solid #eee;
-    }
-    .warning-box {
-        background: #fff3cd;
-        border: 1px solid #ffeaa7;
-        border-radius: 10px;
-        padding: 1rem;
-        margin: 1rem 0;
-        color: #856404;
-    }
-    .success-box {
-        background: #d4edda;
-        border: 1px solid #c3e6cb;
-        border-radius: 10px;
-        padding: 1rem;
-        margin: 1rem 0;
-        color: #155724;
-    }
-    .story-stats {
-        background: #e3f2fd;
-        padding: 1rem;
-        border-radius: 10px;
-        margin: 1rem 0;
-        font-size: 14px;
-        color: #1565c0;
-    }
-    #MainMenu, footer, header {visibility: hidden;}
-    
-    /* Remove default streamlit padding/margins that create white boxes */
-    .block-container {
+        border-top: 1px solid rgba(255,255,255,0.3);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }}
+
+    /* Hide Streamlit default menu, footer, header */
+    #MainMenu, footer, header {{
+        visibility: hidden;
+    }}
+
+    /* Remove default streamlit padding/margins */
+    .block-container {{
         padding-top: 1rem;
-    }
-    
-    /* Ensure no extra spacing */
-    .stSelectbox, .stTextInput, .stTextArea {
+    }}
+
+    /* Form elements margin */
+    .stSelectbox, .stTextInput, .stTextArea {{
         margin-bottom: 1rem;
-    }
+    }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -114,6 +122,24 @@ st.markdown("""
 <div class="main-header">
     <h1 style="margin: 0; font-size: 3rem; font-weight: 300;">GenAI Story Generator</h1>
     <p style="margin: 0.5rem 0 0 0; font-size: 1.2rem; opacity: 0.9;">by Aatcharya Somireddy</p>
+</div>
+""", unsafe_allow_html=True)
+
+# Example main content (replace this with your actual app code)
+with st.container():
+    st.markdown("""
+    <div class="story-container">
+        <p class="story-text">
+            Welcome to the GenAI Story Generator! Click the button below to create amazing stories powered by AI.
+        </p>
+        <button class="generate-btn">Generate Story</button>
+    </div>
+    """, unsafe_allow_html=True)
+
+# Footer
+st.markdown("""
+<div class="footer">
+    &copy; 2025 Aatcharya Somireddy — All rights reserved.
 </div>
 """, unsafe_allow_html=True)
 
