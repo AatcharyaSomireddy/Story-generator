@@ -22,17 +22,7 @@ st.set_page_config(
 
 st.markdown(f"""
 <style>
-    /* Background Image */
-    .stApp {{
-        background-image: url('{background_image_url}');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        filter: brightness(0.85);
-        height: 100vh;
-        width: 100vw;
-    }}
+    
 
     /* Main Header */
     .main-header {{
