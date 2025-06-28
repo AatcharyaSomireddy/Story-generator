@@ -1,11 +1,14 @@
 import streamlit as st
-import openai
+from openai import OpenAI
 import os
 
 st.set_page_config(page_title="Story Generator", layout="centered")
 
 # Load secrets
-openai.api_key = st.secrets["openai_api_key"]
+from openai import OpenAI
+
+client = OpenAI(api_key=st.secrets["openai_api_key"])
+
 
 st.title("📚 AI Story Generator")
 
