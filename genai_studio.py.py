@@ -110,8 +110,8 @@ st.markdown("""
 # -------------------------------
 st.markdown("""
 <div class="main-header">
-    <h1 style="margin: 0; font-size: 3rem; font-weight: 300;">GenAI Story Generator</h1>
-    <p style="margin: 0.5rem 0 0 0; font-size: 1.2rem; opacity: 0.9;">by Aatcharya Somireddy</p>
+    <h1 style="margin: 0; font-size: 3rem; font-weight: 300;">Story Generator</h1>
+    
 </div>
 """, unsafe_allow_html=True)
 
@@ -381,14 +381,14 @@ with col1:
     
     character_name = st.text_input(
         "Main Character Name",
-        value="Alex",
+        value="Harry",
         help="Enter the name of your story's protagonist"
     )
     
     story_context = st.text_area(
         "Story Context & Background",
         height=120,
-        placeholder="Describe the situation, background, or initial setup for your story. Be specific about what happened, where it takes place, and any important details that should be included.",
+        placeholder="Describe the setting, characters, and events leading up to the beginning of your story. Include where and when it takes place, and any important details the reader should know to understand the context.",
         help="Provide rich context to help generate a more engaging story"
     )
     
