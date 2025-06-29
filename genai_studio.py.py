@@ -405,7 +405,7 @@ with col1:
             ["Dark & Mysterious", "Light & Hopeful", "Intense & Thrilling", "Melancholic", "Humorous", "Romantic", "Eerie", "Inspirational"]
         )
 
-with st.sidebar:
+###with st.sidebar:
     st.markdown("### ⚙ Generation Settings")
     
     # Model Selection
@@ -464,7 +464,7 @@ with st.sidebar:
         "top_k": top_k,
         "top_p": top_p,
         "repetition_penalty": repetition_penalty
-    }
+    }###
 
 # -------------------------------
 # Story Generation
