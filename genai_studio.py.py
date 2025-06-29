@@ -405,66 +405,6 @@ with col1:
             ["Dark & Mysterious", "Light & Hopeful", "Intense & Thrilling", "Melancholic", "Humorous", "Romantic", "Eerie", "Inspirational"]
         )
 
-###with st.sidebar:
-    st.markdown("### ⚙ Generation Settings")
-    
-    # Model Selection
-    selected_model_name = st.selectbox(
-        "AI Model",
-        list(MODEL_OPTIONS.keys()),
-        help="Different models have different strengths. Experiment to find your preferred style."
-    )
-    model_id = MODEL_OPTIONS[selected_model_name]
-    
-    # Genre Selection
-    story_type = st.selectbox(
-        "Genre",
-        ["Suspense", "Adventure", "Fantasy", "Drama", "Mystery", "Horror"],
-        help="Choose the genre that best fits your story vision"
-    )
-    
-    # Writing Style
-    writing_style = st.selectbox(
-        "Writing Style",
-        ["Narrative", "Descriptive", "Dialogue-Heavy", "Action-Packed", "Literary", "Cinematic"],
-        help="Select the writing approach you prefer"
-    )
-    
-    # Length Settings
-    length_category = st.selectbox(
-        "Story Length",
-        ["Short (300-500 words)", "Medium (500-800 words)", "Long (800-1200 words)"],
-        help="Choose your preferred story length"
-    )
-    
-    # Map length to tokens
-    length_mapping = {
-        "Short (300-500 words)": 400,
-        "Medium (500-800 words)": 650,
-        "Long (800-1200 words)": 1000
-    }
-    max_tokens = length_mapping[length_category]
-    
-    st.markdown("### 🎨 Creativity Controls")
-    
-    # Creativity Settings
-    temperature = st.slider(
-        "Creativity Level",
-        0.1, 1.5, 0.8, 0.1,
-        help="Higher values make the story more creative and unpredictable"
-    )
-    
-    # Advanced Settings
-    with st.expander("Advanced Settings"):
-        top_k = st.slider("Vocabulary Diversity", 10, 100, 50, 5)
-        top_p = st.slider("Focus Level", 0.1, 1.0, 0.9, 0.05)
-        repetition_penalty = st.slider("Repetition Control", 1.0, 2.0, 1.3, 0.1)
-    
-    creativity_settings = {
-        "top_k": top_k,
-        "top_p": top_p,
-        "repetition_penalty": repetition_penalty
-    }###
 
 # -------------------------------
 # Story Generation
