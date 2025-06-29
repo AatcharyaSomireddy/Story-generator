@@ -122,7 +122,7 @@ with st.container():
     st.markdown("""
     <div class="story-container">
         <p class="story-text">
-            Welcome to the GenAI Story Generator! Click the button below to create amazing stories powered by AI.
+            Welcome to the GenAI Story Generator! Tap the button below to craft captivating, AI-powered stories.
         </p>
         <button class="generate-btn">Generate Story</button>
     </div>
