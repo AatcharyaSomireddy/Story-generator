@@ -32,4 +32,3 @@ These files will be automatically used to install necessary packages on containe
 ```
 
 
-✅ Happy coding with GenAI!
