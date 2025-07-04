@@ -13,21 +13,12 @@ A Streamlit-based application for experimenting with Generative AI models. This 
 
 ## 📦 Requirements
 
-Before running the app, ensure that you have:
-
 - `packages.txt` for system packages (optional)
 - `requirements.txt` for Python dependencies
 
 These files will be automatically used to install necessary packages on container start.
 
-## 🛠️ Development Setup
 
-This project uses [Dev Containers](https://containers.dev/) with the following setup:
-
-- **Python Dev Container**: `mcr.microsoft.com/devcontainers/python:1-3.11-bullseye`
-- **VSCode Extensions**:
-  - `ms-python.python`
-  - `ms-python.vscode-pylance`
 
 ## 📂 File Structure
 
@@ -40,24 +31,5 @@ This project uses [Dev Containers](https://containers.dev/) with the following s
 └── README.md                  # Project documentation
 ```
 
-## ▶️ Run the App
-
-Once the Codespace starts, the following command is run automatically:
-
-```bash
-streamlit run genai_studio.py.py --server.enableCORS false --server.enableXsrfProtection false
-```
-
-Access the app at port **8501** (auto-forwarded in the Codespace).
-
-## 📬 Contributing
-
-Feel free to fork and contribute! Pull requests are welcome.
-
-## 📝 License
-
-This project is licensed under the MIT License.
-
----
 
 ✅ Happy coding with GenAI!
